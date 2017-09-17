@@ -61,7 +61,7 @@ def get_shade(rgb, factor):
     for i, hue in enumerate(rgb_copy):
         rgb_copy[i] = validate_hue(hue + factor)
 
-    return rgb_to_hex(tuple(rgb_copy))
+    return affix_hashtag(rgb_to_hex(tuple(rgb_copy)))
 
 
 def validate_hue(hue):
