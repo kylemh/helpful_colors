@@ -13,21 +13,16 @@ def affix_hashtag(hexcode):
 
 
 def random_rgb():
-    # TODO: Include 1.0 - random() is a float between [0.0, 1.0)
-    r = randint(0, 255)
-    g = randint(0, 255)
-    b = randint(0, 255)
-
-    return (r, g, b)
+    return (randint(0, 255), randint(0, 255), randint(0, 255))
 
 
 def get_color_family(rgb_tuple):
     r = rgb_tuple[0] / 255
     g = rgb_tuple[1] / 255
     b = rgb_tuple[2] / 255
-    hue, saturation, luminosity = colorsys.rgb_to_hls(r, g, b)
+    hue, luminosity, saturation = colorsys.rgb_to_hls(r, g, b)
 
-    if luminosity < 0.2 or (luminosity < 0.3 and saturation < 0.3):
+    if luminosity < 0.2 or (luminosity < 0.25 and saturation < 0.25):
         return "black"
     elif luminosity > 0.8:
         return "white"
@@ -59,9 +54,9 @@ def get_color_family(rgb_tuple):
 
 
 def get_shade(rgb, factor):
-    """Takes RGB hues in a list, adjusts them by a passed factor,
+    """Takes RGB tuple, adjusts values by a passed factor,
     and returns the resultant hexcode"""
-    rgb_copy = copy.copy(rgb)
+    rgb_copy = list(copy.copy(rgb))
     for i, hue in enumerate(rgb_copy):
         rgb_copy[i] = validate_hue(hue + factor)
 
@@ -77,34 +72,28 @@ def validate_hue(hue):
     return hue
 
 
-def shades_from_hex(hexadecimal):
+def get_shades(rgb):
     """Take a hexcode string, and return a dictionary of surrounding shades.
     All bitwise operations are credited to Chris Coyier from CSS Tricks."""
-    decimal = int(hexadecimal, 16)
 
-    rgb = [decimal >> 16, (decimal >> 8) & 0x00FF, decimal & 0x0000FF]
-
-    shades = {
+    return {
         'darkest': affix_hashtag(get_shade(rgb, -50)),
         'darker': affix_hashtag(get_shade(rgb, -25)),
         'lighter': affix_hashtag(get_shade(rgb, 25)),
         'lightest': affix_hashtag(get_shade(rgb, 50))
     }
 
-    return shades
-
 
 def create_color_object(id):
     color_rgb = random_rgb()
     color_hex = rgb_to_hex(color_rgb)
-    color_object = {
+    return {
         'id': id,
         'color': affix_hashtag(color_hex),
         'family': get_color_family(color_rgb),
-        'shades': shades_from_hex(color_hex)
+        'shades': get_shades(color_rgb)
     }
-    return color_object
 
 
-colors_json = json.dumps([create_color_object(i) for i in range(100)], sort_keys=True, indent=2)
+colors_json = json.dumps([create_color_object(i) for i in range(100)], sort_keys=True)
 print(colors_json)
