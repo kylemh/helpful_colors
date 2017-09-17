@@ -27,7 +27,7 @@ def get_color_family(rgb_tuple):
     b = rgb_tuple[2] / 255
     hue, saturation, luminosity = colorsys.rgb_to_hls(r, g, b)
 
-    if luminosity < 0.2:
+    if luminosity < 0.2 or (luminosity < 0.3 and saturation < 0.3):
         return "black"
     elif luminosity > 0.8:
         return "white"
@@ -39,8 +39,12 @@ def get_color_family(rgb_tuple):
     if hue < 30:
         return "red"
     elif hue < 60:
+        if saturation < 0.32:
+            return "brown"
         return "orange"
     elif hue < 90:
+        if saturation < 0.32:
+            return "brown"
         return "yellow"
     elif hue < 150:
         return "green"
@@ -48,7 +52,7 @@ def get_color_family(rgb_tuple):
         return "cyan"
     elif hue < 270:
         return "blue"
-    elif hue < 330:
+    elif hue < 335:
         return "magenta"
     else:
         return "pink"
@@ -61,7 +65,7 @@ def get_shade(rgb, factor):
     for i, hue in enumerate(rgb_copy):
         rgb_copy[i] = validate_hue(hue + factor)
 
-    return affix_hashtag(rgb_to_hex(tuple(rgb_copy)))
+    return rgb_to_hex(tuple(rgb_copy))
 
 
 def validate_hue(hue):
@@ -76,14 +80,15 @@ def validate_hue(hue):
 def shades_from_hex(hexadecimal):
     """Take a hexcode string, and return a dictionary of surrounding shades.
     All bitwise operations are credited to Chris Coyier from CSS Tricks."""
-    decimal = int(hexadecimal[1:], 16)  # hexadecimal has a `#` affixed, hence [1:]
-    rgb = [decimal >> 16, decimal >> 8 & 0x00FF, decimal & 0x0000FF]
+    decimal = int(hexadecimal, 16)
+
+    rgb = [decimal >> 16, (decimal >> 8) & 0x00FF, decimal & 0x0000FF]
 
     shades = {
-        'darkest': get_shade(rgb, -50),
-        'darker': get_shade(rgb, -25),
-        'lighter': get_shade(rgb, 25),
-        'lightest': get_shade(rgb, 50)
+        'darkest': affix_hashtag(get_shade(rgb, -50)),
+        'darker': affix_hashtag(get_shade(rgb, -25)),
+        'lighter': affix_hashtag(get_shade(rgb, 25)),
+        'lightest': affix_hashtag(get_shade(rgb, 50))
     }
 
     return shades
