@@ -1,33 +1,25 @@
 ////////////////////////////////////////
 //      Font-Family Definitions       //
 ////////////////////////////////////////
-
-$helvetica= 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700');
+$source-serif= 'Source Serif Pro', 'Times New Roman', Times, serif;
 
 ///////////////////////////////
 //      Font Variables       //
 ///////////////////////////////
-$display-font= $helvetica;
-$display-font--bold= $helvetica;
-$body-font= $helvetica;
+$font= $source-serif;
 
 ////////////////////////////
 //      Font Mixins       //
 ////////////////////////////
-displayFontBold() {
-  font-family: $display-font--bold;
-  font-weight: 500;
-  color: $display-color;
-}
-
 displayFont() {
-  font-family: $display-font;
+  font-family: $font;
   font-weight: 400;
-  color: $display-color;
+  color: $font-color;
 }
 
-bodyFont() {
-  font-family: $body-font;
-  font-weight: 400;
-  color: $body-color;
+displayFontBold() {
+  font-family: $font;
+  font-weight: 700;
+  color: $font-color;
 }
