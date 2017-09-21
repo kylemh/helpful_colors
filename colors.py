@@ -84,16 +84,26 @@ def get_shades(rgb):
     }
 
 
-def create_color_object(id):
-    color_rgb = random_rgb()
-    color_hex = rgb_to_hex(color_rgb)
-    return {
-        'id': id,
-        'color': affix_hashtag(color_hex),
-        'family': get_color_family(color_rgb),
-        'shades': get_shades(color_rgb)
-    }
+def create_color_batches(number_of_batches):
+    id = 0
+    all_data = {}
+    batch_size = 50  # Number of color objects in each batch
+    for batch_id in range(number_of_batches):
+        all_data[batch_id] = []  # Create { id: [], id: [], id: [] ... } structure
+        for i in range(batch_size):
+            color_rgb = random_rgb()
+            color_hex = rgb_to_hex(color_rgb)
+            all_data[batch_id].append({
+                'id': id,
+                'color': affix_hashtag(color_hex),
+                'family': get_color_family(color_rgb),
+                'shades': get_shades(color_rgb)
+            })
+
+            id += 1  # Move global id incrementor
+
+    return all_data
 
 
-colors_json = json.dumps([create_color_object(i) for i in range(100)], sort_keys=True)
-print(colors_json)
+with open('colors.json', 'w') as outfile:
+    json.dump(create_color_batches(10), outfile)
