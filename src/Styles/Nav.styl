@@ -1,5 +1,54 @@
-nav {
-  width: 20%;
-  height: $height-minus-header;
+.Nav__section {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-items: space-around;
+  align-items: center;
   border-right: 1px solid $black;
+  padding: 35px;
+  background-color: $secondary;
+
+  &.Nav__section--desktop {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 320px;
+    flex-grow: 1;
+  }
+
+  &.Nav__section--mobile {
+    flex-direction: row;
+    width: 100%;
+    height: 75px;
+  }
+
+  button {
+    margin-bottom: 35px;
+  }
+}
+
+.Nav__navList {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+
+  ul {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-bewteen;
+    align-items: left;
+    width: $button-width;
+
+    li {
+      padding-bottom: 20px;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $font-color;
+
+    &:hover {
+      color: $link-hover
+    }
+  }
 }

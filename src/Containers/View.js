@@ -14,7 +14,6 @@ class View extends Component {
     }
   }
 
-
   render() {
     if (process.env.NODE_ENV !== 'production') {
       console.log('👨‍🚀 Application properties:\n', this.props);
@@ -25,9 +24,9 @@ class View extends Component {
     }
 
     return (
-      <div className="view">
+      <section className="view">
         {RenderView}
-      </div>
+      </section>
     );
   }
 }
