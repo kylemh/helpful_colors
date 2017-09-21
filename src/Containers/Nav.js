@@ -26,12 +26,14 @@ class NavContainer extends React.Component {
   }
 
   render() {
-    function colorGroupList(colors) {
-      return colors.map((color) => {
+    function colorGroupList(colorObjects) {
+      return colorObjects.map((colorObject) => {
+        var colorName = colorObject.name;
+
         return (
-          <li>
-            <Link to={`/${color.toLowerCase()}s`}>
-              {color}
+          <li key={colorObject.id}>
+            <Link to={`/${colorName.toLowerCase()}s`}>
+              {colorName}
             </Link>
           </li>
         );
@@ -42,7 +44,7 @@ class NavContainer extends React.Component {
       <section className="Nav__section Nav__section--desktop">
         <Button clickAction={() => {}} text="Random Color" />
         <nav className="Nav__navList">
-          <ul>{ colorGroupList(this.props.colorList) }</ul>
+          <ul>{ colorGroupList(this.props.colorObjectArray) }</ul>
         </nav>
       </section>
     );
@@ -50,7 +52,7 @@ class NavContainer extends React.Component {
 }
 
 NavContainer.PropTypes = {
-  colorList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  colorObjectArray: PropTypes.array.isRequired,
 };
 
 export default NavContainer;
