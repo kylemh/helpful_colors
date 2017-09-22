@@ -1,7 +1,7 @@
-.swatchCard {
+.swatch-card {
     flexContainer(centerContent=false, inlineFlex=false, flexDirection='column')
-    width: 220px;
-    height: 260px;
+    width: 200px;
+    height: 240px;
     border-radius: 10px;
     background-color: $white;
     box-shadow: 0 0 10px 1px $gray--200;
@@ -16,7 +16,7 @@
         box-shadow: 0 3px 8px 4px $gray--200;
     }
 
-    .swatchCard__color {
+    &__color {
         padding: 10px;
         width: 99.5%;
         height: 79.5%;
@@ -24,7 +24,7 @@
         border-radius: 10px 10px 0 0;
     }
 
-    .swatchCard__text {
+    &__text {
         flexContainer(centerContent=true, inlineFlex=false, flexDirection='row')
         align-items: flex-start;
         background-color: $white;

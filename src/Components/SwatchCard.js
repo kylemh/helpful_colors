@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 const SwatchCard = (props) => {
   return (
-    <div className="swatchCard">
-      <div className="swatchCard__color" style={{ backgroundColor: props.hexcode }}/>
-      <div className="swatchCard__text">
+    <div className="swatch-card">
+      <div className="swatch-card__color" style={{ backgroundColor: props.hexcode }}/>
+      <div className="swatch-card__text">
         {props.hexcode.toLowerCase()}
       </div>
     </div>
