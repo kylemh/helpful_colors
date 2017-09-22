@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Containers/Header';
-import Nav from './Containers/Nav';
-import Router from './Containers/RoutingView/Router';
+import ColorNav from './Containers/ColorNav';
+import RoutingView from './Containers/RoutingView/RoutingView';
 import './App.styl';
 
 const colorObjectArray = [
@@ -22,8 +22,8 @@ class App extends Component {
       <div className="app">
         <Header />
         <main>
-          <Nav colorObjectArray={colorObjectArray} />
-          <Router />
+          <ColorNav colorObjectArray={colorObjectArray} />
+          <RoutingView />
         </main>
       </div>
     );

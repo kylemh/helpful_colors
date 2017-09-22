@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import Button from '../Components/Button';
 
-class NavContainer extends Component {
-  // TODO: Rename to ColorNavContainer
+class ColorNav extends Component {
   state = {
     hover: false,
   };
@@ -34,7 +33,7 @@ class NavContainer extends Component {
         return (
           <li key={colorObject.id}>
             <NavLink
-              to={`/color/${colorName.toLowerCase()}s`}
+              to={`/color_name/${colorName.toLowerCase()}s`}
               activeStyle={{
                 fontWeight: 'bold',
                 textDecoration: 'underline',
@@ -60,8 +59,8 @@ class NavContainer extends Component {
   };
 }
 
-NavContainer.PropTypes = {
+ColorNav.PropTypes = {
   colorObjectArray: PropTypes.array.isRequired,
 };
 
-export default NavContainer;
+export default ColorNav;

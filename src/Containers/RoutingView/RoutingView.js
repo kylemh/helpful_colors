@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router';
+  import React, { Component } from 'react';
+import { Route, Switch, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addNumber, subtractNumber } from '../../Actions/Number.js';
@@ -7,7 +7,7 @@ import DetailView from './DetailView';
 import ListView from './ListView';
 import NotFound from '../../Components/NotFound';
 
-class Router extends Component {
+class RoutingView extends Component {
   // state = {
   //   isColorSelected: false,
   // }
@@ -27,8 +27,11 @@ class Router extends Component {
     return (
       <section className="router-view">
         <Switch>
+          <Redirect exact from="/" to="/1" />
+          <Route path="/1" component={ListView} />
           <Route exact path="/:page" component={ListView} />
-          <Route path="/color/:color" component={DetailView} />
+          <Route exact path="/hexcode/:hexcode" component={DetailView} />
+          <Route path="/color_name/:color" component={DetailView} />
           <Route component={NotFound} />
         </Switch>
       </section>
@@ -52,4 +55,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Router);
+)(RoutingView);

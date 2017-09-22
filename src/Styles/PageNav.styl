@@ -1,0 +1,19 @@
+.page-nav {
+    width: 200px;
+
+    &__list {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    &__link {
+        text-decoration: none;
+
+        &--active {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    }
+}
