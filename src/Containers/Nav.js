@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../Components/Button';
 
-class NavContainer extends React.Component {
+class NavContainer extends Component {
+  // TODO: Rename to ColorNavContainer
   state = {
     hover: false,
   };
@@ -13,17 +14,17 @@ class NavContainer extends React.Component {
 
     this.toggleHover = this.toggleHover.bind(this);
     this.colorOnHover = this.colorOnHover.bind(this);
-  }
+  };
 
   toggleHover() {
     this.setState({ hover: !this.state.hover });
-  }
+  };
 
   colorOnHover() {
     // TODO: Implement dynamic color change onHover
     //hexcode `${hexcode}`
     return this.state.hover ? { color: 'red' } : null;
-  }
+  };
 
   render() {
     function colorGroupList(colorObjects) {
@@ -38,7 +39,7 @@ class NavContainer extends React.Component {
           </li>
         );
       });
-    }
+    };
 
     return (
       <section className="Nav__section Nav__section--desktop">
@@ -48,7 +49,7 @@ class NavContainer extends React.Component {
         </nav>
       </section>
     );
-  }
+  };
 }
 
 NavContainer.PropTypes = {

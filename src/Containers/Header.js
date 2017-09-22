@@ -5,7 +5,7 @@ import ColorSearch from './ColorSearch';
 class Header extends Component {
   render() {
     return (
-      <header>
+      <header className="app-header">
         <Logo />
         <ColorSearch />
       </header>

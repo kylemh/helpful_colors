@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from './Containers/Header';
 import Nav from './Containers/Nav';
-import View from './Containers/View';
+import Router from './Containers/RoutingView/Router';
 import './App.styl';
 
 const colorObjectArray = [
@@ -15,20 +15,19 @@ const colorObjectArray = [
   { 'id': 7, 'name': 'Gray' }
 ];
 
-class App extends React.Component {
+class App extends Component {
+
   render() {
     return (
       <div className="app">
         <Header />
         <main>
           <Nav colorObjectArray={colorObjectArray} />
-          <View>
-            {this.props.children}
-          </View>
+          <Router />
         </main>
       </div>
     );
-  }
+  };
 }
 
 export default App;
