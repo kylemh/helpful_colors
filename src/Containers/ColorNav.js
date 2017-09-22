@@ -10,49 +10,46 @@ class ColorNav extends Component {
 
   constructor(props) {
     super(props);
-
-    this.toggleHover = this.toggleHover.bind(this);
-    this.colorOnHover = this.colorOnHover.bind(this);
   };
 
-  toggleHover() {
+  toggleHover = () => {
     this.setState({ hover: !this.state.hover });
   };
 
-  colorOnHover() {
+  colorOnHover = () => {
     // TODO: Implement dynamic color change onHover
     //hexcode `${hexcode}`
     return this.state.hover ? { color: 'red' } : null;
   };
 
+  colorGroupList = (colorObjects) => {
+    return colorObjects.map((colorObject) => {
+      var colorName = colorObject.name;
+
+      return (
+        <li key={colorObject.id}>
+          <NavLink
+            to={`/color_name/${colorName.toLowerCase()}s`}
+            activeStyle={{
+              fontWeight: 'bold',
+              textDecoration: 'underline',
+              textDecorationColor: 'black',
+              color: `${colorName.toLowerCase()}`
+            }}
+          >
+            {colorName}
+          </NavLink>
+        </li>
+      );
+    });
+  }
+
   render() {
-    function colorGroupList(colorObjects) {
-      return colorObjects.map((colorObject) => {
-        var colorName = colorObject.name;
-
-        return (
-          <li key={colorObject.id}>
-            <NavLink
-              to={`/color_name/${colorName.toLowerCase()}s`}
-              activeStyle={{
-                fontWeight: 'bold',
-                textDecoration: 'underline',
-                textDecorationColor: 'black',
-                color: `${colorName.toLowerCase()}`
-              }}
-            >
-              {colorName}
-            </NavLink>
-          </li>
-        );
-      });
-    };
-
     return (
       <section className="side-nav side-nav--desktop">
         <Button clickAction={() => {}} text="Random Color" />
         <nav className="side-nav__links">
-          <ul>{ colorGroupList(this.props.colorObjectArray) }</ul>
+          <ul>{ this.colorGroupList(this.props.colorObjectArray) }</ul>
         </nav>
       </section>
     );

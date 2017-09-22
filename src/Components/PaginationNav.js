@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-function PaginationNav(props) {
+const PaginationNav = (props) => {
   // Credit: http://www.jstips.co/en/javascript/create-range-0...n-easily-using-one-line/
   const pagesArray = Array.from(new Array(props.numberOfPages), (val, index) => index + 1);
 
-  function styledIfCurrentPage(n) {
+  const styledIfCurrentPage = (n) => {
     return n === props.currentPageNumber ? 'page-nav__number--selected' : 'page-nav__number';
   };
 

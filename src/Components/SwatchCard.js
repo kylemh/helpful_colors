@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function SwatchCard(props) {
+const SwatchCard = (props) => {
   return (
     <div className="swatchCard">
       <div className="swatchCard__color" style={{ backgroundColor: props.hexcode }}/>
@@ -20,6 +20,5 @@ SwatchCard.propTypes = {
 SwatchCard.defaultTypes = {
   isSelected: false,
 }
-
 
 export default SwatchCard;

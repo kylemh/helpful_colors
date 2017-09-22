@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Logo() {
+const Logo = () => {
   return (
     <div className="logo__div">
       <svg
