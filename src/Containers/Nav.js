@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Button from '../Components/Button';
 
 class NavContainer extends Component {
@@ -33,18 +33,26 @@ class NavContainer extends Component {
 
         return (
           <li key={colorObject.id}>
-            <Link to={`/${colorName.toLowerCase()}s`}>
+            <NavLink
+              to={`/color/${colorName.toLowerCase()}s`}
+              activeStyle={{
+                fontWeight: 'bold',
+                textDecoration: 'underline',
+                textDecorationColor: 'black',
+                color: `${colorName.toLowerCase()}`
+              }}
+            >
               {colorName}
-            </Link>
+            </NavLink>
           </li>
         );
       });
     };
 
     return (
-      <section className="Nav__section Nav__section--desktop">
+      <section className="side-nav side-nav--desktop">
         <Button clickAction={() => {}} text="Random Color" />
-        <nav className="Nav__navList">
+        <nav className="side-nav__links">
           <ul>{ colorGroupList(this.props.colorObjectArray) }</ul>
         </nav>
       </section>
