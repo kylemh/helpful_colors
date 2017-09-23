@@ -1,13 +1,24 @@
 .swatch-card {
     display: inline-block;
-    width: 200px;
-    height: 230px;
+    width: $swatch-width-normal;
+    height: $swatch-height-normal;
     border-radius: 10px;
     background-color: $white;
     box-shadow: 0 0 10px 1px $gray--200;
     padding: 0;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     // TODO: Use function for transition
+
+    &--small {
+        width: $swatch-width-small;
+        height: $swatch-height-small;
+    }
+
+    &--large {
+        width: $swatch-width-large;
+        height: $swatch-height-large;
+        box-shadow: 0 5px 10px 4px $gray--200 !important;
+    }
 
     &:hover {
         cursor: pointer;
@@ -31,5 +42,4 @@
         border-radius: 0 0 10px 10px;
         padding: rem(5) rem(5) rem(5) rem(15)
     }
-
 }

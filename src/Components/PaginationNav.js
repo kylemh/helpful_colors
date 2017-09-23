@@ -6,19 +6,18 @@ const PaginationNav = (props) => {
   // Credit: http://www.jstips.co/en/javascript/create-range-0...n-easily-using-one-line/
   const pagesArray = Array.from(new Array(props.numberOfPages), (val, index) => index + 1);
 
-  const styledIfCurrentPage = (n) => {
-    return n === props.currentPageNumber ? 'page-nav__number--selected' : 'page-nav__number';
-  };
-
   return (
     <nav className="page-nav">
       <ol className="page-nav__list">
         {pagesArray.map(n => {
           return (
-            <li className={styledIfCurrentPage(n)} key={n}>
+            <li className="page-nav__number" key={n}>
               <NavLink
                 to={`/${n}`}
-                activeClassName="page-nav__link--active"
+                activeStyle={{
+                  fontWeight: 'bold',
+                  textDecoration: 'underline'
+                }}
               >
                 {n}
               </NavLink>

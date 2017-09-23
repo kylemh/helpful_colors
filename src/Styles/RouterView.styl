@@ -8,5 +8,83 @@
     align-items: center;
     height: 100%;
   }
+
+  // TODO: Make this not horrible by off-loading to SwatchCard styles and not use !important
+  // Result of my relative inexperience with pre-processors and how to make sure these get loaded
+  // last. Avert your eyes!
+
+  /* Responsiveness of Detail View */
+  .detail-view {
+    +maxScreen(1275px) {
+      &__swatch-container a {
+        width: 125px !important;
+        height: 125px !important;
+      }
+
+      .swatch-card--small {
+        width: 125px !important;
+        height: 125px !important;
+      }
+    }
+
+    +maxScreen(1275px) {
+      &__swatch-container a {
+        width: 125px !important;
+        height: 125px !important;
+      }
+
+      .swatch-card--small {
+        width: 125px !important;
+        height: 125px !important;
+      }
+    }
+
+    +maxScreen(925px) {
+      &__swatch-container a {
+        width: 100px !important;
+        height: 100px !important;
+      }
+
+      .swatch-card--small {
+        width: 100px !important;
+        height: 100px !important;
+        font-size: 75%;
+      }
+    }
+
+    +maxScreen(750px) {
+      &__swatch-container {
+        flex-wrap: wrap;
+
+        .swatch-card {
+          display: flex;
+          flex-flow: row-reverse nowrap;
+          box-shadow: 0 1px 5px 1px $gray--200;
+          width: 100% !important;
+          height: 25px !important;
+
+          &__color {
+            border-radius: 0 10px 10px 0;
+            width: 75%;
+            height: 99.5%;
+          }
+
+          &__text {
+            width: 25%;
+            height: auto;
+            padding: 3px;
+            align-items: center;
+            border-radius: 10px 0 0 10px;
+          }
+        }
+
+        a {
+          width: 100% !important;
+          height: 25px !important;
+          text-decoration: none !important;
+        }
+      }
+    }
+  }
 }
 

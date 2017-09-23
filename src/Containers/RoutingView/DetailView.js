@@ -43,7 +43,10 @@ class DetailView extends Component {
         <div className="detail-view__swatch-container">
           {this.otherSwatches()}
         </div>
-        <Button text="Clear" clickAction={() => {}}/>
+        <Button
+          text="Clear"
+          clickAction={() => {}}
+        />
       </div>
     );
   };

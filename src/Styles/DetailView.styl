@@ -1,0 +1,25 @@
+.detail-view {
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    padding-bottom: 2.5%;
+
+    .swatch-card--large {
+        font-size: 200%;
+        justify-self: flex-start;
+    }
+
+    &__swatch-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        width: $swatch-width-large;
+        height: $swatch-height-small;
+
+        // Link only present on small swatches
+        a {
+            color: $gray--900;
+            width: $swatch-width-small;
+            height: $swatch-height-small;
+        }
+    }
+}
