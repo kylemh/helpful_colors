@@ -13,19 +13,19 @@ screen(sizeRange) {
   }
 }
 
-min-screen(minWidth) {
+minScreen(minWidth) {
   @media screen and (min-width: minWidth) {
     {block}
   }
 }
 
-max-screen(maxWidth) {
+maxScreen(maxWidth) {
   @media screen and (max-width: maxWidth) {
     {block}
   }
 }
 
-screen-height(sizeRange) {
+screenHeight(sizeRange) {
   if sizeRange[1] {
     @media screen and (min-height: sizeRange[0]) and (max-height: sizeRange[1]) {
       {block}
@@ -35,13 +35,13 @@ screen-height(sizeRange) {
   }
 }
 
-max-screen-height(maxHeight) {
+maxScreenHeight(maxHeight) {
   @media screen and (max-height: maxHeight) {
     {block}
   }
 }
 
-min-screen-height(minHeight) {
+minScreenHeight(minHeight) {
   @media screen and (min-height: minHeight) {
     {block}
   }

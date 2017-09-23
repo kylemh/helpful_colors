@@ -9,16 +9,16 @@ class ListView extends Component {
     colors: [
       '663399',
       'A7AB62',
-      'C862AD',
       '2494C9',
-      '6CEF36',
+      'EE11DD',
+      '6600FF',
+      'C86212',
+      '2AA41F',
+      '61EAF2',
       'E8FE43',
-      '663399',
-      'A7AB62',
-      'C862AD',
-      '2494C9',
-      '6CEF36',
-      'E8FE43',
+      '6CAAA6',
+      '621FAA',
+      'FF1111',
     ]
   };
 
@@ -27,16 +27,24 @@ class ListView extends Component {
   };
 
   swatches = () => {
+    var id = 0;
     return this.state.colors.map(color => {
-      return <Link to={`/hexcode/${color}`}><SwatchCard hexcode={`#${color}`} /></Link>;
+      id++;
+      return (
+        <Link key={id} to={`/hexcode/${color}`}>
+          <SwatchCard key={id} hexcode={`#${color}`} />
+        </Link>
+      );
     })
   };
 
   render() {
     return (
       <div className="router-view__contents list-view">
-        <h1>List View</h1>
-        {this.swatches()}
+        <div className="list-view__swatch-container">
+          {this.swatches()}
+        </div>
+
         <PaginatationNav
           currentPageNumber={this.state.currentPageNumber}
           numberOfPages={10}

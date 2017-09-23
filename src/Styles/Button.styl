@@ -1,7 +1,7 @@
 button {
     margin: 0;
     border: none;
-    font-size: 1em;
+    font-size: 1rem;
     cursor: pointer;
     padding: rem(8 16);
     background: $white;
@@ -9,10 +9,14 @@ button {
     border: 1px solid $black;
     border-radius: rem(5);
     transition: background 250ms ease;
-    height: $button-height;
-    width: $button-width;
+    height: 40px;
+    width: 15vw;
 
     &:hover {
         background: $gray--100;
+    }
+
+    +maxScreen(940px) {
+        font-size: 0.75rem;
     }
 }

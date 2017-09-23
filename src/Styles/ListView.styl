@@ -1,3 +1,24 @@
-.swatch-list {
+.list-view {
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center
+    align-self: center;
+    height: inherit;
+    width: inherit;
 
+    &__swatch-container {
+        display: grid;
+        width: 90%;
+        height: 100%;
+        grid-template-columns: repeat(auto-fill, 15em);
+        grid-gap: 2vw 0;
+        justify-content: space-around;
+        overflow-y: auto;
+
+        a {
+            color: $gray--900;
+            width: 200px;
+            height: 230px;
+        }
+    }
 }
