@@ -13,12 +13,12 @@ class ListView extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchColors(this.parsePageNumber(this.props.match.url));
+    this.props.fetchColors(this.parseRoute(this.props.match.url));
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
-      this.props.fetchColors(this.parsePageNumber(nextProps.match.url));
+      this.props.fetchColors(this.parseRoute(nextProps.match.url));
     }
   }
 
@@ -32,7 +32,7 @@ class ListView extends Component {
     })
   };
 
-  parsePageNumber = (urlParam) => {
+  parseRoute = (urlParam) => {
     let pageNumber = parseInt(urlParam.slice(1), 10);
 
     // Prevent NaN issues
@@ -54,7 +54,7 @@ class ListView extends Component {
           </div>
 
           <PaginatationNav
-            currentPageNumber={this.parsePageNumber(this.props.match.url)}
+            currentPageNumber={this.parseRoute(this.props.match.url)}
             numberOfPages={50}
           />
         </div>

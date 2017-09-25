@@ -10,16 +10,12 @@ class RoutingView extends Component {
   };
 
   render() {
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('👨‍🚀 Application properties:\n', this.props);
-    }
-
     return (
       <section className="router-view">
         <Switch>
           <Redirect exact from="/" to="/1" />
           <Route exact path="/1" component={ListView} />
-          <Route path="/:page" component={ListView} />
+          <Route exact path="/:pageNumber" component={ListView} />
           <Route path="/hexcode/:hexcode" component={DetailView} />
           <Route path="/color_name/:color" component={ListView} />
           <Route component={NotFound} />
