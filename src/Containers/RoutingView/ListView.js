@@ -1,57 +1,77 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchColors } from '../../State/Actions/Colors';
 import SwatchCard from '../../Components/SwatchCard';
 import PaginatationNav from '../../Components/PaginationNav';
+import LoadingGIF from '../../Images/loading.gif';
 
 class ListView extends Component {
   state = {
     currentPageNumber: 1,
-    colors: [
-      '663399',
-      'A7AB62',
-      '2494C9',
-      'EE11DD',
-      '6600FF',
-      'C86212',
-      '2AA41F',
-      '61EAF2',
-      'E8FE43',
-      '6CAAA6',
-      '621FAA',
-      'FF1111',
-    ]
   };
 
   constructor(props) {
     super(props);
   };
 
+  componentWillMount() {
+    this.props.fetchColors(this.state.currentPageNumber);
+  }
+
   swatches = () => {
     var id = 0;
-    return this.state.colors.map(color => {
+    console.log(this.props.listedColors);
+    return this.props.listedColors.map(color => {
       id++;
       return (
-        <Link key={id} to={`/hexcode/${color}`}>
-          <SwatchCard key={id} hexcode={`#${color}`} />
+        <Link key={id} to={`/hexcode/${color.hexcode}`}>
+          <SwatchCard key={id} hexcode={`#${color.hexcode}`} />
         </Link>
       );
     })
   };
 
   render() {
-    return (
-      <div className="router-view__contents list-view">
-        <div className="list-view__swatch-container">
-          {this.swatches()}
+    if (this.props.isLoading) {
+      return (
+        <div className="router-view__contents" style={{ justifyContent: 'center' }}>
+          <img src={LoadingGIF} alt="Spinning icon indicating that content is loading" />
         </div>
+      );
+    } else {
+      return (
+        <div className="router-view__contents list-view">
+          <div className="list-view__swatch-container">
+            {this.swatches()}
+          </div>
 
-        <PaginatationNav
-          currentPageNumber={this.state.currentPageNumber}
-          numberOfPages={10}
-        />
-      </div>
-    );
+          <PaginatationNav
+            currentPageNumber={this.state.currentPageNumber}
+            numberOfPages={10}
+          />
+        </div>
+      );
+    }
   };
 }
 
-export default ListView;
+function mapStateToProps (state) {
+  return {
+    isLoading: state.colors.isLoading,
+    listedColors: state.colors.listedColors
+  };
+};
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    fetchColors
+  }, dispatch);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListView);
+
