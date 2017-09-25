@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
-import createStore from './State/Services/Store';
 import createHistory from 'history/createBrowserHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import axe from 'react-axe';
+import store from './State/Services/Store';
 import App from './App';
 
-const store = createStore();
 const browserHistory = createHistory();
 const history = syncHistoryWithStore(browserHistory, store);
 

@@ -1,24 +1,41 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-function number(state = { value: 0 }, action) {
-  const newState = Object.assign({}, state);
+const initialState = {
+  isLoading: false,
+  error: '',
+  listedColors: [],
+  colorsOfName: []
+}
 
+function colors(state = initialState, action) {
   switch (action.type) {
-    case 'ADD_NUMBER':
-      newState.value++;
-      break;
-    case 'SUBTRACT_NUMBER':
-      --newState.value;
-      break;
+    case 'FETCH_COLORS_PENDING':
+      return { ...state, isLoading: true };
+
+    case 'FETCH_COLORS_REJECTED':
+      return { ...state, isLoading: false, error: action.payload };
+
+    case 'FETCH_COLORS_FULFILLED':
+      return { ...state, isLoading: false, listedColors: action.payload.data };
+
+    case 'FETCH_COLORS_BY_NAME_PENDING':
+      return { ...state, isLoading: true };
+
+    case 'FETCH_COLORS_BY_NAME_REJECTED':
+      return { ...state, isLoading: false, error: action.payload };
+
+    case 'RECEIVE_COLORS_BY_NAME_FULFILLED':
+      return { ...state, isLoading: false, colorsOfName: action.payload.data };
+
     default:
       return state;
   }
-
-  return newState;
 }
 
-export default combineReducers({
-  number,
+const reducers = combineReducers({
+  colors,
   routing: routerReducer,
 });
+
+export default reducers;
