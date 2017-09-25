@@ -105,7 +105,7 @@ def generate_data(number_of_batches):
             color_hex = rgb_to_hex(color_rgb)
             color_name = get_color_family(color_rgb)
             all_colors[batch_id].append({
-                'color': color_hex,
+                'hexcode': color_hex,
                 'family': color_name,
                 'shades': get_shades(color_rgb)
             })
