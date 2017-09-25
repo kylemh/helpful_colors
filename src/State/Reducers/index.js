@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   error: '',
   listedColors: [],
   colorsOfName: []

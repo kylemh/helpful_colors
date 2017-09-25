@@ -8,21 +8,22 @@ import PaginatationNav from '../../Components/PaginationNav';
 import LoadingGIF from '../../Images/loading.gif';
 
 class ListView extends Component {
-  state = {
-    currentPageNumber: 1,
-  };
-
   constructor(props) {
     super(props);
   };
 
-  componentWillMount() {
-    this.props.fetchColors(this.state.currentPageNumber);
+  componentDidMount() {
+    this.props.fetchColors(this.parsePageNumber(this.props.match.url));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.props.fetchColors(this.parsePageNumber(nextProps.match.url));
+    }
   }
 
   swatches = () => {
     var id = 0;
-    console.log(this.props.listedColors);
     return this.props.listedColors.map(color => {
       id++;
       return (
@@ -32,6 +33,11 @@ class ListView extends Component {
       );
     })
   };
+
+  parsePageNumber = (urlParam) => {
+    let pageNumber = parseInt(urlParam.slice(1));
+    return pageNumber !== pageNumber ? 1 : pageNumber;
+  }
 
   render() {
     if (this.props.isLoading) {
@@ -48,7 +54,7 @@ class ListView extends Component {
           </div>
 
           <PaginatationNav
-            currentPageNumber={this.state.currentPageNumber}
+            currentPageNumber={this.parsePageNumber(this.props.match.url)}
             numberOfPages={10}
           />
         </div>
