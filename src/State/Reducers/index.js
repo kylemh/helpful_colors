@@ -4,8 +4,9 @@ import { routerReducer } from 'react-router-redux';
 const initialState = {
   isLoading: true,
   error: '',
+  randomColor: '',
   listedColors: [],
-  colorsOfName: []
+  colorsOfName: [],
 }
 
 function colors(state = initialState, action) {
@@ -25,8 +26,17 @@ function colors(state = initialState, action) {
     case 'FETCH_COLORS_BY_NAME_REJECTED':
       return { ...state, isLoading: false, error: action.payload };
 
-    case 'RECEIVE_COLORS_BY_NAME_FULFILLED':
+    case 'FETCH_COLORS_BY_NAME_FULFILLED':
       return { ...state, isLoading: false, colorsOfName: action.payload.data };
+
+    case 'FETCH_RANDOM_COLOR_PENDING':
+      return { ...state, isLoading: true };
+
+    case 'FETCH_RANDOM_COLOR_REJECTED':
+      return { ...state, isLoading: false, error: action.payload };
+
+    case 'FETCH_RANDOM_COLOR_FULFILLED':
+      return { ...state, isLoading: false, randomColor: action.payload.data }
 
     default:
       return state;

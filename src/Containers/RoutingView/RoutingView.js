@@ -16,6 +16,7 @@ class RoutingView extends Component {
           <Redirect exact from="/" to="/1" />
           <Route exact path="/1" component={ListView} />
           <Route exact path="/:pageNumber" component={ListView} />
+          <Route exact path="/random" component={DetailView} />
           <Route path="/hexcode/:hexcode" component={DetailView} />
           <Route path="/color_name/:color" component={ListView} />
           <Route component={NotFound} />

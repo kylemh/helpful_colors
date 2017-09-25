@@ -25,11 +25,6 @@ class PaginationNav extends Component {
     return Array.from(Array(end - start).keys()).map(i => i + start)
   }
 
-  spacerComponent = () => {
-    console.log('spacer render attempt');
-    return <div style={{ width: '150px', backgroundColor: 'white', border: '1px solid black' }}>&nbsp;</div>;
-  }
-
   leftShiftButton = () => {
     const lastPageOnNav = this.state.pagesDisplayed[this.state.pagesDisplayed.length - 1]
     const isDisabled = lastPageOnNav <= 10;
@@ -92,7 +87,7 @@ class PaginationNav extends Component {
   }
 }
 
-PaginationNav.propTypes = {
+PaginationNav.PropTypes = {
   currentPageNumber: PropTypes.number.isRequired,
   numberOfPages: PropTypes.number.isRequired
 };

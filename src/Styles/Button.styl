@@ -39,3 +39,46 @@
     height: 30px;
     width: 100px;
 }
+
+
+
+.router-button {
+    width: 80% !important;
+    height: 40px;
+    margin-bottom: 25px;
+}
+
+.router-button button {
+    margin: 0;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: $white;
+    displayFontBold();
+    border: 1px solid $black;
+    border-radius: rem(5);
+    transition: background 250ms ease;
+    height: 40px;
+    width: 100%;
+    max-width: 260px;
+
+    &:hover {
+        background-color: $gray--100;
+    }
+
+    +maxScreen(940px) {
+        font-size: 0.75rem;
+    }
+
+    &--disabled {
+        opacity: 0.6;
+        background-color: $gray--200;
+        border: 1px solid $gray--300;
+        color: $gray--400;
+
+        &:hover {
+            background-color: $gray--200;
+            cursor: not-allowed;
+        }
+    }
+}

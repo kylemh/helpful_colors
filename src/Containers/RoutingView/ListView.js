@@ -1,38 +1,66 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchColors } from '../../State/Actions/Colors';
+import { fetchColors, fetchColorsFromName } from '../../State/Actions/Colors';
 import SwatchCard from '../../Components/SwatchCard';
 import PaginatationNav from '../PaginationNav';
 import LoadingGIF from '../../Images/loading.gif';
 
 class ListView extends Component {
+  state = {
+    isPaginatedView: true,
+  }
+
   constructor(props) {
     super(props);
   };
 
   componentDidMount() {
-    this.props.fetchColors(this.parseRoute(this.props.match.url));
+    // Check URL to decide on how to populate list view
+    if (this.props.match.url.includes('color')) {
+      this.setState({ isPaginatedView: false })
+      this.props.fetchColorsFromName(this.props.match.params.color);
+    } else {
+      this.setState({ isPaginatedView: true })
+      this.props.fetchColors(this.parsePageNumber(this.props.match.url));
+    }
   }
 
   componentWillReceiveProps(nextProps) {
+    // Force re-render on new routes
     if (nextProps.location.pathname !== this.props.location.pathname) {
-      this.props.fetchColors(this.parseRoute(nextProps.match.url));
+      if (this.state.isPaginatedView) {
+        this.props.fetchColors(this.parsePageNumber(nextProps.match.url));
+      } else {
+        this.props.fetchColorsFromName(nextProps.match.params.color);
+      }
     }
   }
 
   swatches = () => {
-    return this.props.listedColors.map(color => {
-      return (
-        <Link key={color.hexcode} to={{ pathname: `/hexcode/${color.hexcode}`, state: { shades: color.shades } }}>
-          <SwatchCard key={color.hexcode} hexcode={`#${color.hexcode}`} />
-        </Link>
-      );
-    })
+    if (this.state.isPaginatedView) {
+      return this.props.listedColors.map(color => {
+        return (
+          <Link key={color.hexcode} to={{ pathname: `/hexcode/${color.hexcode}`, state: { shades: color.shades } }}>
+            <SwatchCard key={color.hexcode} hexcode={`#${color.hexcode}`} />
+          </Link>
+        );
+      })
+    } else if (!this.state.isPaginatedView) {
+      // List Swatches of Color
+      return this.props.colorsOfName.map(hexcode => {
+        return (
+          <Link key={hexcode} to={{ pathname: `/hexcode/${hexcode}`, state: { shades: {} } }}>
+            <SwatchCard key={hexcode} hexcode={`#${hexcode}`} />
+          </Link>
+        );
+      })
+    }
   };
 
-  parseRoute = (urlParam) => {
+  parsePageNumber = (urlParam) => {
     let pageNumber = parseInt(urlParam.slice(1), 10);
 
     // Prevent NaN issues
@@ -46,7 +74,7 @@ class ListView extends Component {
           <img src={LoadingGIF} alt="Spinning icon indicating that content is loading" />
         </div>
       );
-    } else {
+    } else if (this.state.isPaginatedView && !this.props.isLoading) {
       return (
         <div className="router-view__contents list-view">
           <div className="list-view__swatch-container">
@@ -54,9 +82,17 @@ class ListView extends Component {
           </div>
 
           <PaginatationNav
-            currentPageNumber={this.parseRoute(this.props.match.url)}
+            currentPageNumber={this.parsePageNumber(this.props.match.url)}
             numberOfPages={50}
           />
+        </div>
+      );
+    } else {
+      return (
+        <div className="router-view__contents list-view">
+          <div className="list-view__swatch-container">
+            {this.swatches()}
+          </div>
         </div>
       );
     }
@@ -66,13 +102,15 @@ class ListView extends Component {
 function mapStateToProps (state) {
   return {
     isLoading: state.colors.isLoading,
-    listedColors: state.colors.listedColors
+    listedColors: state.colors.listedColors,
+    colorsOfName: state.colors.colorsOfName,
   };
 };
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    fetchColors
+    fetchColors,
+    fetchColorsFromName
   }, dispatch);
 };
 
