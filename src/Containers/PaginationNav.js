@@ -83,7 +83,7 @@ class PaginationNav extends Component {
   }
 }
 
-PaginationNav.PropTypes = {
+PaginationNav.propTypes = {
   currentPageNumber: PropTypes.number.isRequired,
   numberOfPages: PropTypes.number.isRequired
 };

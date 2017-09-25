@@ -40,7 +40,7 @@ class ColorNav extends Component {
     return (
       <section className="side-nav side-nav--desktop">
         <button className="button router-button" onClick={this.goToRandom}>Random Color</button>
-        <Link to="/1" className="router-button"><button>See All</button></Link>
+        <Link to="/1" className="button router-button"><button>See All</button></Link>
         <u style={{ padding: '0 0 10px 0' }}>List By Color</u>
         <nav className="side-nav__links">
           <ul>{this.colorGroupList(this.props.colorObjectArray)}</ul>
@@ -50,7 +50,7 @@ class ColorNav extends Component {
   }
 }
 
-ColorNav.PropTypes = {
+ColorNav.propTypes = {
   colorObjectArray: PropTypes.array.isRequired,
 };
 
