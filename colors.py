@@ -95,7 +95,7 @@ def get_shades(rgb):
     }
 
 
-def create_color_batches(number_of_batches):
+def generate_data(number_of_batches):
     all_colors = {}
     batch_size = 50  # Number of color objects in each batch
     for batch_id in range(number_of_batches):
@@ -117,4 +117,4 @@ def create_color_batches(number_of_batches):
 
 
 with open('colors.json', 'w') as outfile:
-    json.dump(create_color_batches(10), outfile)
+    json.dump(generate_data(10), outfile)
