@@ -19,7 +19,7 @@ class RoutingView extends Component {
         </Switch>
       </section>
     );
-  };
+  }
 }
 
 export default RoutingView;

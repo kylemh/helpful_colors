@@ -13,23 +13,31 @@ class ListView extends Component {
   }
 
   componentDidMount() {
-    // Check URL to decide on how to populate list view
+    // Check URL to decide on how to initially populate list view
     if (this.props.match.url.includes('color')) {
-      this.setState({ isPaginatedView: false })
+      this.setState({ isPaginatedView: false });
       this.props.fetchColorsFromName(this.props.match.params.color);
     } else {
-      this.setState({ isPaginatedView: true })
+      this.setState({ isPaginatedView: true });
       this.props.fetchColors(this.parsePageNumber(this.props.match.url));
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    // Force re-render on new routes
-    if (nextProps.location.pathname !== this.props.location.pathname) {
-      if (this.state.isPaginatedView) {
-        this.props.fetchColors(this.parsePageNumber(nextProps.match.url));
-      } else {
-        this.props.fetchColorsFromName(nextProps.match.params.color);
+  componentDidUpdate(prevProps) {
+    if(this.props.match.params.color) {  // ListView by color name
+
+      if (this.props.match.params.color !== prevProps.match.params.color) {
+
+        // fetch data for new color
+        this.setState({ isPaginatedView: false });
+        this.props.fetchColorsFromName(this.props.match.params.color);
+      }
+    } else { // ListView by page
+      if(this.props.match.url !== prevProps.match.url) {
+
+        // fetch data for some page
+         this.setState({ isPaginatedView: true });
+         this.props.fetchColors(this.parsePageNumber(this.props.match.url));
       }
     }
   }
@@ -38,7 +46,12 @@ class ListView extends Component {
     if (this.state.isPaginatedView) {
       return this.props.listedColors.map(color => {
         return (
-          <Link key={color.hexcode} to={{ pathname: `/hexcode/${color.hexcode}`, state: { shades: color.shades } }}>
+          <Link
+            key={color.hexcode}
+            to={{
+              pathname: `/hexcode/${color.hexcode}`,
+              state: { shades: color.shades }
+            }}>
             <SwatchCard key={color.hexcode} hexcode={`#${color.hexcode}`} />
           </Link>
         );
@@ -47,7 +60,12 @@ class ListView extends Component {
       // List Swatches of Color
       return this.props.colorsOfName.map(hexcode => {
         return (
-          <Link key={hexcode} to={{ pathname: `/hexcode/${hexcode}`, state: { shades: {} } }}>
+          <Link
+            key={hexcode}
+            to={{
+              pathname: `/hexcode/${hexcode}`,
+              state: { shades: {} }
+            }}>
             <SwatchCard key={hexcode} hexcode={`#${hexcode}`} />
           </Link>
         );

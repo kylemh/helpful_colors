@@ -3,18 +3,22 @@ import SwatchCard from '../../Components/SwatchCard';
 import Button from '../../Components/Button';
 
 class DetailView extends Component {
-  mainSwatch = (hexcode) => {
-    return <SwatchCard hexcode={`#${hexcode}`} cardSize="large" />;
+  componentWillUpdate() {
+    console.log(this.state);
   }
 
-  otherSwatches = (shades) => {
+  mainSwatch = hexcode => {
+    return <SwatchCard hexcode={`#${hexcode}`} cardSize="large" />;
+  };
+
+  otherSwatches = shades => {
     return (
       <div className="detail-view__swatch-container">
-        { shades.darkest && <SwatchCard hexcode={`#${shades.darkest}`} cardSize="small" /> }
-        { shades.darker && <SwatchCard hexcode={`#${shades.darker}`} cardSize="small" /> }
+        {shades.darkest && <SwatchCard hexcode={`#${shades.darkest}`} cardSize="small" />}
+        {shades.darker && <SwatchCard hexcode={`#${shades.darker}`} cardSize="small" />}
         <SwatchCard hexcode={`#${this.props.match.params.hexcode}`} cardSize="small" />
-        { shades.lighter && <SwatchCard hexcode={`#${shades.lighter}`} cardSize="small" /> }
-        { shades.lightest && <SwatchCard hexcode={`#${shades.lightest}`} cardSize="small" /> }
+        {shades.lighter && <SwatchCard hexcode={`#${shades.lighter}`} cardSize="small" />}
+        {shades.lightest && <SwatchCard hexcode={`#${shades.lightest}`} cardSize="small" />}
       </div>
     );
   };
@@ -26,13 +30,10 @@ class DetailView extends Component {
 
         {this.otherSwatches(this.props.location.state.shades)}
 
-        <Button
-          text="Clear"
-          clickAction={() => this.props.history.goBack()}
-        />
+        <Button text="Clear" clickAction={() => this.props.history.goBack()} />
       </div>
     );
-  };
+  }
 }
 
 export default DetailView;
