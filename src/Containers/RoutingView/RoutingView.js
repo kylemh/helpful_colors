@@ -5,10 +5,6 @@ import ListView from './ListView';
 import NotFound from '../../Components/NotFound';
 
 class RoutingView extends Component {
-  constructor(props) {
-    super(props);
-  };
-
   render() {
     return (
       <section className="router-view">

@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import SwatchCard from '../../Components/SwatchCard';
 import Button from '../../Components/Button';
 
 class DetailView extends Component {
-  constructor(props) {
-    super(props);
-  };
-
   mainSwatch = (hexcode) => {
     return <SwatchCard hexcode={`#${hexcode}`} cardSize="large" />;
   }

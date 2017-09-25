@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
-import Button from '../Components/Button';
 
 class ColorNav extends Component {
   state = {
     hover: false,
-  };
-
-  constructor(props) {
-    super(props);
   };
 
   colorGroupList = (colorObjects) => {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,10 +11,6 @@ class ListView extends Component {
   state = {
     isPaginatedView: true,
   }
-
-  constructor(props) {
-    super(props);
-  };
 
   componentDidMount() {
     // Check URL to decide on how to populate list view

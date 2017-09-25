@@ -8,10 +8,6 @@ class PaginationNav extends Component {
     pagesDisplayed: [],
   };
 
-  constructor(props) {
-    super(props);
-  };
-
   componentWillMount() {
     this.setState({ pagesDisplayed: this.pageRange(this.props.currentPageNumber) })
   }
