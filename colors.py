@@ -3,13 +3,24 @@ import copy
 import json
 import colorsys
 
+colors_in_names = {
+    'black': [],
+    'white': [],
+    'gray': [],
+    'red': [],
+    'brown': [],
+    'orange': [],
+    'yellow': [],
+    'green': [],
+    'cyan': [],
+    'blue': [],
+    'magenta': [],
+    'pink': [],
+}
+
 
 def rgb_to_hex(rgb_tuple):
     return '%02X%02X%02X' % (rgb_tuple)
-
-
-def affix_hashtag(hexcode):
-    return '#%s' % hexcode
 
 
 def random_rgb():
@@ -23,34 +34,34 @@ def get_color_family(rgb_tuple):
     hue, luminosity, saturation = colorsys.rgb_to_hls(r, g, b)
 
     if luminosity < 0.2 or (luminosity < 0.25 and saturation < 0.25):
-        return "black"
+        return 'black'
     elif luminosity > 0.8:
-        return "white"
+        return 'white'
 
     if saturation < 0.25:
-        return "gray"
+        return 'gray'
 
     hue *= 360
     if hue < 30:
-        return "red"
+        return 'red'
     elif hue < 60:
         if saturation < 0.32:
-            return "brown"
-        return "orange"
+            return 'brown'
+        return 'orange'
     elif hue < 90:
         if saturation < 0.32:
-            return "brown"
-        return "yellow"
+            return 'brown'
+        return 'yellow'
     elif hue < 150:
-        return "green"
+        return 'green'
     elif hue < 210:
-        return "cyan"
+        return 'cyan'
     elif hue < 270:
-        return "blue"
+        return 'blue'
     elif hue < 335:
-        return "magenta"
+        return 'magenta'
     else:
-        return "pink"
+        return 'pink'
 
 
 def get_shade(rgb, factor):
@@ -77,32 +88,32 @@ def get_shades(rgb):
     All bitwise operations are credited to Chris Coyier from CSS Tricks."""
 
     return {
-        'darkest': affix_hashtag(get_shade(rgb, -50)),
-        'darker': affix_hashtag(get_shade(rgb, -25)),
-        'lighter': affix_hashtag(get_shade(rgb, 25)),
-        'lightest': affix_hashtag(get_shade(rgb, 50))
+        'darkest': get_shade(rgb, -100),
+        'darker': get_shade(rgb, -50),
+        'lighter': get_shade(rgb, 50),
+        'lightest': get_shade(rgb, 100)
     }
 
 
 def create_color_batches(number_of_batches):
-    id = 0
-    all_data = {}
+    all_colors = {}
     batch_size = 50  # Number of color objects in each batch
     for batch_id in range(number_of_batches):
-        all_data[batch_id] = []  # Create { id: [], id: [], id: [] ... } structure
+        all_colors[batch_id] = []  # Create { id: [], id: [], id: [] ... }
         for i in range(batch_size):
             color_rgb = random_rgb()
             color_hex = rgb_to_hex(color_rgb)
-            all_data[batch_id].append({
-                'id': id,
-                'color': affix_hashtag(color_hex),
-                'family': get_color_family(color_rgb),
+            color_name = get_color_family(color_rgb)
+            all_colors[batch_id].append({
+                'color': color_hex,
+                'family': color_name,
                 'shades': get_shades(color_rgb)
             })
 
-            id += 1  # Move global id incrementor
+            # Add hexcode to correct family grouping
+            colors_in_names[color_name].append(color_hex)
 
-    return all_data
+    return {'all_colors': all_colors, 'colors_by_name': colors_in_names}
 
 
 with open('colors.json', 'w') as outfile:
