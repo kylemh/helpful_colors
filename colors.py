@@ -33,9 +33,9 @@ def get_color_family(rgb_tuple):
     b = rgb_tuple[2] / 255
     hue, luminosity, saturation = colorsys.rgb_to_hls(r, g, b)
 
-    if luminosity < 0.2 or (luminosity < 0.25 and saturation < 0.25):
+    if luminosity < 0.15 or saturation < 0.05:
         return 'black'
-    elif luminosity > 0.8:
+    elif luminosity > 0.85:
         return 'white'
 
     if saturation < 0.25:
