@@ -23,12 +23,10 @@ class ListView extends Component {
   }
 
   swatches = () => {
-    var id = 0;
     return this.props.listedColors.map(color => {
-      id++;
       return (
-        <Link key={id} to={`/hexcode/${color.hexcode}`}>
-          <SwatchCard key={id} hexcode={`#${color.hexcode}`} />
+        <Link key={color.hexcode} to={`/hexcode/${color.hexcode}`}>
+          <SwatchCard key={color.hexcode} hexcode={`#${color.hexcode}`} />
         </Link>
       );
     })
