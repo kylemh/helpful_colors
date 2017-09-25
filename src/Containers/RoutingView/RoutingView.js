@@ -18,10 +18,10 @@ class RoutingView extends Component {
       <section className="router-view">
         <Switch>
           <Redirect exact from="/" to="/1" />
-          <Route path="/1" component={ListView} />
-          <Route exact path="/:page" component={ListView} />
-          <Route exact path="/hexcode/:hexcode" component={DetailView} />
-          <Route path="/color_name/:color" component={DetailView} />
+          <Route exact path="/1" component={ListView} />
+          <Route path="/:page" component={ListView} />
+          <Route path="/hexcode/:hexcode" component={DetailView} />
+          <Route path="/color_name/:color" component={ListView} />
           <Route component={NotFound} />
         </Switch>
       </section>

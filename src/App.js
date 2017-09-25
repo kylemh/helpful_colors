@@ -5,14 +5,18 @@ import RoutingView from './Containers/RoutingView/RoutingView';
 import './App.styl';
 
 const colorObjectArray = [
-  { 'id': 0, 'name': 'Red'},
-  { 'id': 1, 'name': 'Orange' },
-  { 'id': 2, 'name': 'Yellow' },
-  { 'id': 3, 'name': 'Green' },
-  { 'id': 4, 'name': 'Blue' },
-  { 'id': 5, 'name': 'Purple' },
-  { 'id': 6, 'name': 'Brown' },
-  { 'id': 7, 'name': 'Gray' }
+  { 'id': 0, 'name': 'Black'},
+  { 'id': 1, 'name': 'Blue' },
+  { 'id': 2, 'name': 'Brown' },
+  { 'id': 3, 'name': 'Cyan' },
+  { 'id': 4, 'name': 'Gray' },
+  { 'id': 5, 'name': 'Green' },
+  { 'id': 6, 'name': 'Magenta' },
+  { 'id': 7, 'name': 'Orange' },
+  { 'id': 8, 'name': 'Pink' },
+  { 'id': 9, 'name': 'Red' },
+  { 'id': 10, 'name': 'White' },
+  { 'id': 11, 'name': 'Yellow' },
 ];
 
 class App extends Component {

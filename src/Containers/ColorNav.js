@@ -12,29 +12,19 @@ class ColorNav extends Component {
     super(props);
   };
 
-  toggleHover = () => {
-    this.setState({ hover: !this.state.hover });
-  };
-
-  colorOnHover = () => {
-    // TODO: Implement dynamic color change onHover
-    //hexcode `${hexcode}`
-    return this.state.hover ? { color: 'red' } : null;
-  };
-
   colorGroupList = (colorObjects) => {
     return colorObjects.map((colorObject) => {
       var colorName = colorObject.name;
 
       return (
         <li key={colorObject.id}>
+          <div className="color-block" style={{ backgroundColor: `${colorName.toLowerCase()}` }}></div>
           <NavLink
             to={`/color_name/${colorName.toLowerCase()}s`}
             activeStyle={{
               fontWeight: 'bold',
               textDecoration: 'underline',
               textDecorationColor: 'black',
-              color: `${colorName.toLowerCase()}`
             }}
           >
             {colorName}
@@ -48,6 +38,7 @@ class ColorNav extends Component {
     return (
       <section className="side-nav side-nav--desktop">
         <Button clickAction={() => {}} text="Random Color" />
+        <u style={{ padding: '0 0 10px 0' }}>List By Color</u>
         <nav className="side-nav__links">
           <ul>{ this.colorGroupList(this.props.colorObjectArray) }</ul>
         </nav>
