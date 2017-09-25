@@ -25,7 +25,7 @@ class ListView extends Component {
   swatches = () => {
     return this.props.listedColors.map(color => {
       return (
-        <Link key={color.hexcode} to={`/hexcode/${color.hexcode}`}>
+        <Link key={color.hexcode} to={{ pathname: `/hexcode/${color.hexcode}`, state: { shades: color.shades } }}>
           <SwatchCard key={color.hexcode} hexcode={`#${color.hexcode}`} />
         </Link>
       );

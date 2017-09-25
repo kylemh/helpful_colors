@@ -4,48 +4,37 @@ import SwatchCard from '../../Components/SwatchCard';
 import Button from '../../Components/Button';
 
 class DetailView extends Component {
-  state = {
-    colors: [
-      '52297A',
-      '5C2E8A',
-      '663399',
-      '7038A8',
-      '7A3DB8',
-    ]
-  };
-
   constructor(props) {
     super(props);
   };
 
-  mainSwatch = () => {
-    var colorsCopy = this.state.colors;
-    var middleColor = colorsCopy[Math.round((colorsCopy.length - 1) / 2)];
-    return <SwatchCard hexcode={`#${middleColor}`} cardSize="large" />;
+  mainSwatch = (hexcode) => {
+    return <SwatchCard hexcode={`#${hexcode}`} cardSize="large" />;
   }
 
-  otherSwatches = () => {
-    var id = 0;
-    return this.state.colors.map(color => {
-      id++;
-      return (
-        <Link key={id} to={`/hexcode/${color}`}>
-          <SwatchCard key={id} hexcode={`#${color}`} cardSize="small" />
-        </Link>
-      );
-    })
+  otherSwatches = (shades) => {
+    return (
+      <div className="detail-view__swatch-container">
+        <SwatchCard hexcode={`#${shades.darkest}`} cardSize="small" />
+        <SwatchCard hexcode={`#${shades.darker}`} cardSize="small" />
+        <SwatchCard hexcode={`#${this.props.match.params.hexcode}`} cardSize="small" />
+        <SwatchCard hexcode={`#${shades.lighter}`} cardSize="small" />
+        <SwatchCard hexcode={`#${shades.lightest}`} cardSize="small" />
+      </div>
+    );
   };
 
   render() {
+    console.log(this.props.location.state);
     return (
       <div className="router-view__contents detail-view">
-        {this.mainSwatch()}
-        <div className="detail-view__swatch-container">
-          {this.otherSwatches()}
-        </div>
+        {this.mainSwatch(this.props.match.params.hexcode)}
+
+        {this.otherSwatches(this.props.location.state.shades)}
+
         <Button
           text="Clear"
-          clickAction={() => {}}
+          clickAction={() => this.props.history.goBack()}
         />
       </div>
     );
