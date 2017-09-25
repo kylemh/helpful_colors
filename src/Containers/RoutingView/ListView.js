@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchColors } from '../../State/Actions/Colors';
 import SwatchCard from '../../Components/SwatchCard';
-import PaginatationNav from '../../Components/PaginationNav';
+import PaginatationNav from '../PaginationNav';
 import LoadingGIF from '../../Images/loading.gif';
 
 class ListView extends Component {
@@ -35,8 +35,10 @@ class ListView extends Component {
   };
 
   parsePageNumber = (urlParam) => {
-    let pageNumber = parseInt(urlParam.slice(1));
-    return pageNumber !== pageNumber ? 1 : pageNumber;
+    let pageNumber = parseInt(urlParam.slice(1), 10);
+
+    // Prevent NaN issues
+    return pageNumber !== pageNumber ? 1 : pageNumber; // eslint-disable-line
   }
 
   render() {
@@ -55,7 +57,7 @@ class ListView extends Component {
 
           <PaginatationNav
             currentPageNumber={this.parsePageNumber(this.props.match.url)}
-            numberOfPages={10}
+            numberOfPages={50}
           />
         </div>
       );

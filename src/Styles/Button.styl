@@ -1,9 +1,9 @@
-button {
+.button {
     margin: 0;
     border: none;
     font-size: 1rem;
     cursor: pointer;
-    background: $white;
+    background-color: $white;
     displayFontBold();
     border: 1px solid $black;
     border-radius: rem(5);
@@ -13,10 +13,29 @@ button {
     max-width: 260px;
 
     &:hover {
-        background: $gray--100;
+        background-color: $gray--100;
     }
 
     +maxScreen(940px) {
         font-size: 0.75rem;
     }
+
+    &--disabled {
+        opacity: 0.6;
+        background-color: $gray--200;
+        border: 1px solid $gray--300;
+        color: $gray--400;
+
+        &:hover {
+            background-color: $gray--200;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.page-group-shift-button {
+    padding: 0 1.5rem;
+    font-size: 0.75rem;
+    height: 30px;
+    width: 100px;
 }

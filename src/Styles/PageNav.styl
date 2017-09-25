@@ -1,17 +1,21 @@
 .page-nav {
-    width: 200px;
-    padding: 2.5% 0 1% 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 550px;
 
     &__list {
+        width: 340px;
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-around;
         align-items: center;
-
+        padding: 5% 0;
     }
 
     &__number {
-        padding: 0 10px;
+        padding: 0 8px;
     }
 
     &__number a {
