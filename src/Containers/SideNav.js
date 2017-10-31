@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
-class ColorNav extends Component {
+class SideNav extends Component {
   state = {
     hover: false,
   };
@@ -32,15 +32,17 @@ class ColorNav extends Component {
   goToRandom = () => {
     const color = Math.floor(Math.random() * 16777215).toString(16);
     this.props.history.push('/hexcode/' + color, {
-      shades: {}, fromRandom: true
+      shades: {},
+      fromRandom: true,
     });
   };
 
   render() {
     return (
       <section className="side-nav side-nav--desktop">
-        <button className="button router-button" onClick={this.goToRandom}>Random Color</button>
-        <Link to="/1" className="button router-button"><button>See All</button></Link>
+        <button className="button router-button" onClick={this.goToRandom}>
+          Random Color
+        </button>
         <u style={{ padding: '0 0 10px 0' }}>List By Color</u>
         <nav className="side-nav__links">
           <ul>{this.colorGroupList(this.props.colorObjectArray)}</ul>
@@ -50,8 +52,8 @@ class ColorNav extends Component {
   }
 }
 
-ColorNav.propTypes = {
+SideNav.propTypes = {
   colorObjectArray: PropTypes.array.isRequired,
 };
 
-export default withRouter(ColorNav);
+export default withRouter(SideNav);

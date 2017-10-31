@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SwatchCard from '../../Components/SwatchCard';
-import Button from '../../Components/Button';
+import SwatchCard from '../Components/SwatchCard';
+import Button from '../Components/Button';
 
 class DetailView extends Component {
   componentWillUpdate() {

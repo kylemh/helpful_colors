@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import DetailView from './DetailView';
 import ListView from './ListView';
-import NotFound from '../../Components/NotFound';
+import NotFound from '../Components/NotFound';
 
 class RoutingView extends Component {
   render() {

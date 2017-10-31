@@ -4,7 +4,7 @@ import { routerReducer } from 'react-router-redux';
 const initialState = {
   isLoading: true,
   error: '',
-  randomColor: '',
+  randomColor: {},
   listedColors: [],
   colorsOfName: [],
 }
